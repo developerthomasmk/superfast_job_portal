@@ -1,3 +1,2 @@
-const url="http://localhost:2000"
-
+const url="https://backend-zeka.onrender.com"
 export default url;
