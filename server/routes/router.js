@@ -120,10 +120,7 @@ router.get('/profile',checkforcookie,(req,res)=>{
           res.status(400).json({"message":'Unable to find the user'});
        
 });
-//route to form for employers to post job
-router.get('/jobpostform',(req,res)=> {
-    res.render(process.cwd()+'/frontend/views/html/employerjobposting.ejs',{employername:username});
-});
+
 
 router.post('/jobpostform',async (req,res)=> {
     const {jobtitle,jobdescription,companyname,location,jobtype,experiencelevel,datePosted}=req.body;
