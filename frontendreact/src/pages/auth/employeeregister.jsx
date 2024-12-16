@@ -1,18 +1,29 @@
 import './index.css';
 import downarrow from '../../assets/images/downarrow.png';
 import { PostRegisterDetails } from '../../api/auth';
+import { useState } from 'react';
 
 
 
 function EmployeeRegister()
 {
+   const [password,setPassword]=useState();
+   const [cPassword,setCPassword]=useState();
+       const [message,setMessage]=useState();
   const auth=async(e)=>{
      e.preventDefault();
+     if(password!==cPassword)
+       {
+         alert("Password does not match!")
+         return
+       }
      const formData=new FormData(e.target);
      const entries=Object.fromEntries(formData.entries());
      const response=await PostRegisterDetails(entries);
+     
      if(response)
      {
+        setMessage(response.message)
        alert(response.message)
      }
   }
@@ -32,11 +43,11 @@ function EmployeeRegister()
             <label for="email">Email</label>
          </div>
          <div class="inputbox">
-            <input type="password" placeholder="Password" name="password"/>
+            <input type="password" placeholder="Password" name="password"  onChange={(e)=>setPassword(e.target.value)}/>
             <label for="password">Password</label>
          </div>
          <div class="inputbox">
-            <input type="text" placeholder="Confirm Password" name="confirmpassword"/>
+            <input type="text" placeholder="Confirm Password" name="confirmpassword" onChange={(e)=>setCPassword(e.target.value)}/>
             <label for="confirmpassword">Confirm Password</label>
          </div>
             <div class="option1">
@@ -47,7 +58,9 @@ function EmployeeRegister()
          </div>
          <h4><button  style={{color: "white",fontSize:"22px",border:'none',background:'transparent'}} type='submit'>Register</button></h4>
          <h2> Already have an account?<a href="/login" style={{color:"white",textDecoration:"none"}}> Log in</a></h2>
+         <label style={{color:"white",marginLeft:"60px"}}>{message}</label>
         </form>
+      
         </div>
     </div>
       <div class="authfooter">

@@ -7,6 +7,8 @@ const cookieparser=require('cookie-parser');
 dotenv.config({path:'../server/config.env'});
 const cors=require('cors')
 
+
+const local_URL='http://localhost:3000'
 app.use(cookieparser());
 app.use(cors({origin:"https://superfast-job-portal.onrender.com"}))
 mongoose.connect(process.env.MONGO_URI,{dbName:'RecruitmentDB'}).then(e=>console.log('Database Connected!')).catch(e=>console.log(e));

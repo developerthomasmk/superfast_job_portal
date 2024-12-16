@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { PostLoginDetails } from "../../api/auth";
+import { useState } from "react";
 
 function Login()
 {
     const navigate=useNavigate();
 
+    const [message,setMessage]=useState()
     const auth=async(e)=>{
       e.preventDefault();
       const formData=new FormData(e.target);
@@ -12,9 +14,12 @@ function Login()
       const response=await PostLoginDetails(entries);
       if(response)
       {
-         console.log("res",response);
+        setMessage(response.message)
         if(response.token && response.user=="Joinee")
+        {
          navigate('/jobpostview');
+        }
+       
         if(response.token && response.user=="Employer")
          navigate('/jobposting');
       }
@@ -37,6 +42,7 @@ return (<>
          <h2><button  style={{color: "white",fontSize:"22px",marginLeft:"65px",border:'none',background:'transparent'}} type='submit'> Log in</button></h2>
        
          <h2 style={{color: "white",marginLeft:"95px"}} onClick={()=>navigate('/employee_register')}> Sign up</h2> </form>
+         <label style={{color:"white"}}>{message}</label>
         </div>
     </div>
       <div class="authfooter">

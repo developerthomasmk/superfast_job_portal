@@ -25,7 +25,7 @@ import { useLocation } from 'react-router-dom';
          console.log("entries",entries);
          
          const response=await JobUpdatePostAPI(entries);
-         if(response.data)
+         if(response)
          {
            alert(response.message);
          }
@@ -36,8 +36,9 @@ import { useLocation } from 'react-router-dom';
          const formData=new FormData(e.target);
          const entries=Object.fromEntries(formData.entries());
          const response=await JobPostAPI(entries);
-         if(response.data)
+         if(response)
          {
+            
             alert(response.message);
          }
          console.log(response);
@@ -88,7 +89,7 @@ import { useLocation } from 'react-router-dom';
                 </select>
          </div>
          <div class="inputboxposting">
-            <label for="datePosted">Job Type *</label>
+            <label for="datePosted">Date *</label>
              <input type="date" name="datePosted"/>
          </div>
          <div class="continuebutton">
